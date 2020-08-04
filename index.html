@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html ng-app='ShoppingListApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style> body { font-size: 1.2em; }</style>
+    <title>Custom Service</title>
+  </head>
+  <body>
+    <h1>To Buy List</h1>
+    <h3>Please insert at least 5 items</h3>
+    <div ng-controller='ToBuyController as toBuyItem'>
+      <input type="text" ng-model="toBuyItem.itemName" placeholder="item name">
+      <input type="text" ng-model="toBuyItem.itemQuantity" placeholder="quantity">
+      <button ng-click="toBuyItem.addItem()">Add Item To Shopping List</button><br>
+      <ol>
+        <li ng-repeat="item in toBuyItem.toBuy">
+          Buy ({{ item.quantity }}) of ({{ item.name }})
+          <button ng-click="toBuyItem.checkOff($index)">bought</button><br>
+        </li>
+      </ol><br>
+      <h3 ng-if="toBuyItem.toBuy.length == 0">Everything is bought!</h3>
+    </div>
+
+
+    <h1>Bought List</h1>
+    <div ng-controller='AlreadyBoughtController as alreadyBought'>
+      <h2 ng-if="alreadyBought.bought.length == 0">Nothing bought yet</h2>
+      <ol>
+        <li ng-repeat="item in alreadyBought.bought">
+          Bought ({{ item.quantity }}) of ({{ item.name }})
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>
